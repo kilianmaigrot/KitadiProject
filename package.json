@@ -24,6 +24,9 @@
     }
   },
   "devDependencies": {
-    "cordova-sqlite-storage": "^6.1.0"
+    "autoprefixer": "^10.4.16",
+    "cordova-sqlite-storage": "^6.1.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
   }
 }
