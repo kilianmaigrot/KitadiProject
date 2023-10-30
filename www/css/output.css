@@ -534,121 +534,359 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-* {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-body {
-  -webkit-touch-callout: none;
-  /* prevent callout to copy image, etc when tap to hold */
-  -webkit-text-size-adjust: none;
-  /* prevent webkit from resizing text to fit */
-  -webkit-user-select: none;
-  /* prevent copy paste, to allow, change 'none' to 'text' */
-  background-color:#E4E4E4;
-  background-image:linear-gradient(to bottom, #A7A7A7 0%, #E4E4E4 51%);
-  font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
-  font-size:12px;
-  height:100vh;
-  margin:0px;
-  padding:0px;
-  /* Padding to avoid the "unsafe" areas behind notches in the screen */
-  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
-  text-transform:uppercase;
-  width:100%;
+.pointer-events-none {
+  pointer-events: none;
 }
 
-/* Portrait layout (default) */
-
-.app {
-  background:url(../img/logo.png) no-repeat center top;
-  /* 170px x 200px */
-  position:absolute;
-  /* position in the center of the screen */
-  left:50%;
-  top:50%;
-  height:50px;
-  /* text area height */
-  width:225px;
-  /* text area width */
-  text-align:center;
-  padding:180px 0px 0px 0px;
-  /* image height is 200px (bottom 20px are overlapped with text) */
-  margin:-115px 0px 0px -112px;
-  /* offset vertical: half of image height and text area height */
-  /* offset horizontal: half of text area width */
+.absolute {
+  position: absolute;
 }
 
-/* Landscape layout (with min-width) */
-
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-  .app {
-    background-position:left center;
-    padding:75px 0px 75px 170px;
-    /* padding-top + padding-bottom + text area = image height */
-    margin:-90px 0px 0px -198px;
-    /* offset vertical: half of image height */
-    /* offset horizontal: half of image width and text area width */
-  }
+.relative {
+  position: relative;
 }
 
-h1 {
-  font-size:24px;
-  font-weight:normal;
-  margin:0px;
-  overflow:visible;
-  padding:0px;
-  text-align:center;
+.inset-y-0 {
+  top: 0px;
+  bottom: 0px;
 }
 
-.event {
-  border-radius:4px;
-  color:#FFFFFF;
-  font-size:12px;
-  margin:0px 30px;
-  padding:2px 0px;
+.left-0 {
+  left: 0px;
 }
 
-.event.listening {
-  background-color:#333333;
-  display:block;
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
-.event.received {
-  background-color:#4B946A;
-  display:none;
-}
-
-#deviceready.ready .event.listening {
-  display: none;
-}
-
-#deviceready.ready .event.received {
+.block {
   display: block;
 }
 
-@keyframes fade {
-  from {
-    opacity: 1.0;
-  }
-
-  50% {
-    opacity: 0.4;
-  }
-
-  to {
-    opacity: 1.0;
-  }
+.flex {
+  display: flex;
 }
 
-.blink {
-  animation:fade 3000ms infinite;
-  -webkit-animation:fade 3000ms infinite;
+.table {
+  display: table;
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  body {
-    background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
+.h-5 {
+  height: 1.25rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-5 {
+  width: 1.25rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.table-auto {
+  table-layout: auto;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-lime-900 {
+  --tw-border-opacity: 1;
+  border-color: rgb(54 83 20 / var(--tw-border-opacity));
+}
+
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity));
+}
+
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
+.bg-slate-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
+}
+
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-lime-900 {
+  --tw-text-opacity: 1;
+  color: rgb(54 83 20 / var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+tr {
+  padding-bottom: 1rem;
+}
+
+.hover\:border-lime-600:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(101 163 13 / var(--tw-border-opacity));
+}
+
+.hover\:bg-slate-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
+.focus\:border-blue-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+.focus\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:border-gray-700 {
+    --tw-border-opacity: 1;
+    border-color: rgb(55 65 81 / var(--tw-border-opacity));
+  }
+
+  .dark\:border-gray-600 {
+    --tw-border-opacity: 1;
+    border-color: rgb(75 85 99 / var(--tw-border-opacity));
+  }
+
+  .dark\:bg-gray-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  }
+
+  .dark\:text-gray-400 {
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+
+  .dark\:text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+  .dark\:placeholder-gray-400::-moz-placeholder {
+    --tw-placeholder-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-placeholder-opacity));
+  }
+
+  .dark\:placeholder-gray-400::placeholder {
+    --tw-placeholder-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-placeholder-opacity));
+  }
+
+  .dark\:focus\:border-blue-500:focus {
+    --tw-border-opacity: 1;
+    border-color: rgb(59 130 246 / var(--tw-border-opacity));
+  }
+
+  .dark\:focus\:ring-blue-500:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
   }
 }
