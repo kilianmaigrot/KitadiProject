@@ -1,4 +1,4 @@
-let pageBody = document.getElementById("body")
+let body = document.getElementById("body")
 
 document.addEventListener('deviceready', onDeviceReady, false);
 
@@ -8,34 +8,6 @@ function onDeviceReady() {
         name: "Kitadi.db",
         location: "default",
     });
-    
-    // Création de la table Client si inexistante
-    myDBKitadi.transaction(function (transaction) {
-        transaction.executeSql(
-            "CREATE TABLE IF NOT EXISTS Client (Id integer PRIMARY KEY AUTOINCREMENT NOT NULL, Nom varchar(25) NOT NULL, Prenom varchar(25) NOT NULL, Adresse varchar(150) NOT NULL, CodPostal number(5) NOT NULL, Ville varchar(50) NOT NULL, Tel varchar(20) NOT NULL, Mail varchar(80) NOT NULL, HtMaison decimal(3,2) NOT NULL, Altitude number(4), PuissanceMaison number(6) NOT NULL, DteVisite date not null)",
-            [],
-            function (tx, result) {
-                // alert("La Table Client a été créé : " + result);
-            },
-            function (error) {
-                // alert("Une erreur s'est produite à la création de la table Client : " + error);
-            }
-            );
-        });
-        
-        // Création de la table Piece si inéxistente
-        myDBKitadi.transaction(function (transaction) {
-            transaction.executeSql(
-                "CREATE TABLE IF NOT EXISTS Piece (Id integer PRIMARY KEY AUTOINCREMENT NOT NULL, LibellePiece varchar(50) NOT NULL, Longueur decimal(5,2)  NOT NULL, Largeur decimal(5,2)  NOT NULL, Hauteur decimal(5,2)  NOT NULL, Volume decimal(10,2) NOT NULL, TempBase decimal(5,2) NOT NULL, TempConfort decimal(5,2) NOT NULL, NivIsolation decimal(5,2) NOT NULL, PuissancePiece decimal(10,2) NOT NULL, Client_Id number, FOREIGN KEY (Client_Id) REFERENCES Client (Id))",
-                [],
-                function (tx, result) {
-                    // alert("La Table Piece a été créé : " + result);
-                },
-                function (error) {
-                    // alert("Une erreur s'est produite à la création de la table Piece : " + error );
-                }
-                );
-            });
             
             // Insertion des cas de test, si la base est crée pour la première fois
             let top = 0;
@@ -142,7 +114,7 @@ function onDeviceReady() {
 
 function loadAccueil () {
     
-    pageBody.innerHTML = `
+    body.innerHTML = `
     <main class="flex flex-col p-4 bg-lime-200 min-h-screen text-lime-900 font-semibold text-base md:text-2xl">
     <img class="mx-auto mb-8" src="./img/KitadiLogo.png" />
     <h1 class="text-center mb-8">Bienvenue sur l'application Kitadi Energies de calcul de la puissance énergétique d'une Maison.</h1>
