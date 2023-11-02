@@ -143,7 +143,7 @@ function onDeviceReady() {
 function loadAccueil () {
     
     pageBody.innerHTML = `
-    <main class="flex flex-col p-4 bg-slate-300 min-h-screen text-lime-900 font-semibold text-base md:text-2xl">
+    <main class="flex flex-col p-4 bg-lime-200 min-h-screen text-lime-900 font-semibold text-base md:text-2xl">
     <img class="mx-auto mb-8" src="./img/KitadiLogo.png" />
     <h1 class="text-center mb-8">Bienvenue sur l'application Kitadi Energies de calcul de la puissance énergétique d'une Maison.</h1>
     <button class="bg-slate-400 font-bold py-2 px-4 rounded mb-8">

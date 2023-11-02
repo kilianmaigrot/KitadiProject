@@ -5,6 +5,17 @@ let footer = document.getElementById('footer');
 let kwTotal = 0
 
 
+document.addEventListener('deviceready', onDeviceReady, false);
+
+function onDeviceReady() {
+    // Ouverture de la base de données.
+    myDBKitadi = window.sqlitePlugin.openDatabase({
+        name: "Kitadi.db",
+        location: "default",
+    });
+};
+
+
 header.innerHTML = `<div id="accordion-collapse" data-accordion="collapse">
 <h2 id="accordion-collapse-heading-2">
   <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
@@ -291,8 +302,99 @@ class baseClient {
 };
 
 btnSave.addEventListener('click', function(){
-    console.log(baseClient);
+    creationDossier()
 });
+
+function creationDossier() {
+    // On fait le client
+    alert("Fonction lancée")
+    myDBKitadi.transaction(function (transaction) {
+      var executeQuery =
+        "INSERT INTO Client (Nom, Prenom, Adresse, CodPostal, Ville, Tel, Mail, HtMaison, Altitude, PuissanceMaison, DteVisite) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+      transaction.executeSql(
+        executeQuery,
+        [
+            `${nomClient.value}`,
+          `${prenomClient.value}`,
+          `${adresseClient.value}`,
+          `${codePostal.value}`,
+          `${villeClient.value}`,
+          `${telClient.value}`,
+          `${mailClient.value}`,
+          `${hauteurP.value}`,
+          null,
+          `${kwTotal}`,
+          "01/02/1963"
+        ],
+        function (tx, result) {
+          alert("Insertion OK !!!");
+        },
+        function (error) {
+          alert("Une erreur s'est produite !!! : " + error);
+        }
+      );
+    });
+  
+    // On va rechercher le dernier max ID cr�er dans la table Client
+    let idMax = 0;
+    myDBKitadi.transaction(function (transaction) {
+      transaction.executeSql(
+        "SELECT Max(Id) as MaxId FROM Client",
+        [],
+        function (tx, results) {
+          if (results.rows.length != 0) {
+            idMax = results.rows.items(0).MaxId;
+          }
+        },
+        function (error) {
+          console.log("Erreur, base non dsponible.");
+        }
+      );
+    });
+  
+    // On insert les pi�ces si l'idMax (Id client) est sup�rieur � 0
+    if(idMax > 0) {
+      for (let j = 0; j < i; j++) {
+  
+          //-- Variables nom, volume ect --//
+          let reqNomPiece = document.getElementById(`nomPiece${j}`);
+          let reqLongueurP = document.getElementById(`longueurP${j}`);
+          let reqLargeurP = document.getElementById(`largeurP${j}`);
+          let reqHauteurP = document.getElementById(`hauteurP${j}`);
+          let reqVolumeP = document.getElementById(`volumeTotal${j}`);
+          let reqTb = document.getElementById(`tempBase${j}`);
+          let reqTc = document.getElementById(`tempConfort${j}`);
+          let reqG = document.getElementById(`isolation${j}`);
+          let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
+  
+          myDBKitadi.transaction(function (transaction) {
+              var executeQuery =
+                "INSERT INTO Piece (INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+              transaction.executeSql(
+                executeQuery,
+                [
+                  reqNomPiece.value,
+                  reqLongueurP.value,
+                  reqLargeurP.value,
+                  reqHauteurP.value,
+                  reqVolumeP.value,
+                  reqTb.value,
+                  reqTc.value,
+                  reqG.value,
+                  reqPuissancePiece.value,
+                  idMax,
+                ],
+                function (tx, result) {
+                  alert("Insertion OK !!!");
+                },
+                function (error) {
+                  alert("Une erreur s'est produite !!!");
+                }
+              );
+          });
+        }
+      }
+    }
 
 
 
