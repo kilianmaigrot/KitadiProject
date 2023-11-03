@@ -192,13 +192,12 @@ function loadTable () {
             let len = results.rows.length, i;
             for (i = 0; i < len; i++) {
                 tableProjets.innerHTML += `
-                <tr id="loadDossier${results.rows.item(i).Id}">
+                <tr id="${results.rows.item(i).Id}">
                     <td>${results.rows.item(i).Nom.toUpperCase()} ${results.rows.item(i).Prenom}</td>
                     <td>${results.rows.item(i).Adresse}<br/>${results.rows.item(i).CodPostal} ${results.rows.item(i).Ville}</td>
                     <td>${results.rows.item(i).PuissanceMaison}</td>
                     <td>${results.rows.item(i).DteVisite}</td>
                 </tr>`
-    })
             }
         }, null);
     });
