@@ -13,39 +13,9 @@ function onDeviceReady() {
         name: "Kitadi.db",
         location: "default",
     });
-
-    
-    
-    // Création de la table Client si inexistante
-    myDBKitadi.transaction(function (transaction) {
-        transaction.executeSql(
-            "CREATE TABLE IF NOT EXISTS Client (Id integer PRIMARY KEY AUTOINCREMENT NOT NULL, Nom varchar(25) NOT NULL, Prenom varchar(25) NOT NULL, Adresse varchar(150) NOT NULL, CodPostal number(5) NOT NULL, Ville varchar(50) NOT NULL, Tel varchar(20) NOT NULL, Mail varchar(80) NOT NULL, HtMaison decimal(3,2) NOT NULL, Altitude number(4), PuissanceMaison number(6) NOT NULL, DteVisite date not null)",
-            [],
-            function (tx, result) {
-                // alert("La Table Client a été créé : " + result);
-            },
-            function (error) {
-                // alert("Une erreur s'est produite à la création de la table Client : " + error);
-            }
-        );
-    });
-        
-        // Création de la table Piece si inéxistente
-        myDBKitadi.transaction(function (transaction) {
-            transaction.executeSql(
-                "CREATE TABLE IF NOT EXISTS Piece (Id integer PRIMARY KEY AUTOINCREMENT NOT NULL, LibellePiece varchar(50) NOT NULL, Longueur decimal(5,2)  NOT NULL, Largeur decimal(5,2)  NOT NULL, Hauteur decimal(5,2)  NOT NULL, Volume decimal(10,2) NOT NULL, TempBase decimal(5,2) NOT NULL, TempConfort decimal(5,2) NOT NULL, NivIsolation decimal(5,2) NOT NULL, PuissancePiece decimal(10,2) NOT NULL, Client_Id number, FOREIGN KEY (Client_Id) REFERENCES Client (Id))",
-                [],
-                function (tx, result) {
-                    // alert("La Table Piece a été créé : " + result);
-                },
-                function (error) {
-                    // alert("Une erreur s'est produite à la création de la table Piece : " + error );
-                }
-                );
-            });
 };
 
-function loadDossier_Empty () {
+
 header.innerHTML = `<div id="accordion-collapse" data-accordion="collapse">
 <h2 id="accordion-collapse-heading-2">
   <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
@@ -122,33 +92,35 @@ let btnSave = document.getElementById('btnSave');
 let btnRetour = document.getElementById('btnRetour');
 
 
-// nomClient.addEventListener('change', function(){
-//     console.log('Nom client '+nomClient.value);
-// });
+nomClient.addEventListener('change', function(){
+    console.log('Nom client '+nomClient.value);
+});
 
-// prenomClient.addEventListener('change', function(){
-//     console.log('prenom client '+prenomClient.value);
-// });
+prenomClient.addEventListener('change', function(){
+    console.log('prenom client '+prenomClient.value);
+});
 
-// adresseClient.addEventListener('change', function(){
-//     console.log('adresse client '+adresseClient);
-// });
+adresseClient.addEventListener('change', function(){
+    console.log('adresse client '+adresseClient);
+});
 
-// codePostal.addEventListener('change', function(){
-//     console.log('code postal '+codePostal.value);
-// });
+codePostal.addEventListener('change', function(){
+    console.log('code postal '+codePostal.value);
+});
 
-// villeClient.addEventListener('change', function(){
-//     console.log('ville '+villeClient.value);
-// });
+villeClient.addEventListener('change', function(){
+    console.log('ville '+villeClient.value);
+});
 
-// telClient.addEventListener('change', function(){
-//     console.log('telephone '+telClient.value);
-// });
+telClient.addEventListener('change', function(){
+    console.log('telephone '+telClient.value);
+});
 
-// mailClient.addEventListener('change', function(){
-//     console.log('mail '+mailClient.value);
-// });
+mailClient.addEventListener('change', function(){
+    console.log('mail '+mailClient.value);
+});
+
+
 
 btnCreation.addEventListener('click', function(){
 
@@ -243,27 +215,27 @@ tb.addEventListener('change', function(){
     console.log(tb.value);
     updateDeltaT();
     puissanceP(indicePuissance);
-    
+
 });
 
 tc.addEventListener('change', function(){
     console.log(tc.value);
     updateDeltaT();
     puissanceP(indicePuissance);
-    
-    
+
+   
 });
 
 longueurP.addEventListener('change', function(){
     console.log(longueurP.value);
     puissanceP(indicePuissance);
-    
+
     
 });
 largeurP.addEventListener('change', function(){
     console.log(largeurP.value);
     puissanceP(indicePuissance);
-    
+
     
     
 });
@@ -271,14 +243,14 @@ hauteurP.addEventListener('change', function(){
     console.log(hauteurP.value);
     updateVolume();
     puissanceP(indicePuissance);
-    
+
     
 });
 
 g.addEventListener('change', function(){
     console.log(g.value);
     puissanceP(indicePuissance);
-    
+
 });
 
 
@@ -299,120 +271,120 @@ function puissanceP(indice){
     console.log(puissancePiece.value);
     puissancePieces[indice]=puissancePiece.value;
     console.log(puissancePieces);
-    
+
     kwTotal = 0;
+
+for (j=0; j<puissancePieces.length; j++){
+
+    kwTotal  += parseFloat=(puissancePieces[j]);
+    console.log(kwTotal);
+    let totalDiv = document.getElementById("total")
+
+    totalDiv.innerHTML = `${kwTotal}`;
+
     
-    for (j=0; j<puissancePieces.length; j++){
-        
-        kwTotal  += parseFloat=(puissancePieces[j]);
-        console.log(kwTotal);
-        let totalDiv = document.getElementById("total")
-        
-        totalDiv.innerHTML = `${kwTotal}`;
-        
-        
-        
-    }};
+
+}};
 });
-}
 
 btnSave.addEventListener('click', function(){
-    creationDossier_Client()
-    creationDossier_Pieces ()
+    creationDossier()
 });
 
-function creationDossier_Client() {
-    const dateToday = new Date();
+function creationDossier() {
     // On fait le client
     alert("Fonction lancée")
     myDBKitadi.transaction(function (transaction) {
-        var executeQuery =
+      var executeQuery =
         "INSERT INTO Client (Nom, Prenom, Adresse, CodPostal, Ville, Tel, Mail, HtMaison, Altitude, PuissanceMaison, DteVisite) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        transaction.executeSql(
-            executeQuery,
-            [
-                `${nomClient.value}`,
-                `${prenomClient.value}`,
-                `${adresseClient.value}`,
-                `${codePostal.value}`,
-                `${villeClient.value}`,
-                `${telClient.value}`,
-                `${mailClient.value}`,
-                `${hauteurP.value}`,
-                null,
-                `${kwTotal}`,
-                `${dateToday}`,
-            ],
-            function (tx, result) {
-                alert("Insertion OK !!!");
-            },
-            function (error) {
-                alert("Une erreur s'est produite !!! : " + error);
-            }
-            );
-        });
-        
-        // On va rechercher le dernier max ID cr�er dans la table Client
-        let idMax = 0;
-        myDBKitadi.transaction(function (transaction) {
-            transaction.executeSql(
-                "SELECT Max(Id) as MaxId FROM Client",
-                [],
-                function (tx, results) {
-                    if (results.rows.length != 0) {
-                        idMax = results.rows.items(0).MaxId;
-                    }
-                },
-                function (error) {
-                    console.log("Erreur, base non dsponible.");
-                }
-                );
-            });
-            
+      transaction.executeSql(
+        executeQuery,
+        [
+            `${nomClient.value}`,
+          `${prenomClient.value}`,
+          `${adresseClient.value}`,
+          `${codePostal.value}`,
+          `${villeClient.value}`,
+          `${telClient.value}`,
+          `${mailClient.value}`,
+          `${hauteurP.value}`,
+          null,
+          `${kwTotal}`,
+          "01/02/1963"
+        ],
+        function (tx, result) {
+          alert("Insertion OK !!!");
+        },
+        function (error) {
+          alert("Une erreur s'est produite !!! : " + error);
         }
-        
-function creationDossier_Pieces () {
-    
+      );
+    });
+  
+    // On va rechercher le dernier max ID cr�er dans la table Client
+    let idMax = 0;
+    myDBKitadi.transaction(function (transaction) {
+      transaction.executeSql(
+        "SELECT Max(Id) as MaxId FROM Client",
+        [],
+        function (tx, results) {
+          if (results.rows.length != 0) {
+            idMax = results.rows.items(0).MaxId;
+          }
+        },
+        function (error) {
+          console.log("Erreur, base non dsponible.");
+        }
+      );
+    });
+  
     // On insert les pi�ces si l'idMax (Id client) est sup�rieur � 0
     if(idMax > 0) {
-        for (let j = 0; j < i; j++) {
-            
-            //-- Variables nom, volume ect --//
-            let reqNomPiece = document.getElementById(`nomPiece${j}`);
-            let reqLongueurP = document.getElementById(`longueurP${j}`);
-            let reqLargeurP = document.getElementById(`largeurP${j}`);
-            let reqHauteurP = document.getElementById(`hauteurP${j}`);
-            let reqVolumeP = document.getElementById(`volumeTotal${j}`);
-            let reqTb = document.getElementById(`tempBase${j}`);
-            let reqTc = document.getElementById(`tempConfort${j}`);
-            let reqG = document.getElementById(`isolation${j}`);
-            let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
-            
-            myDBKitadi.transaction(function (transaction) {
-                var executeQuery =
+      for (let j = 0; j < i; j++) {
+  
+          //-- Variables nom, volume ect --//
+          let reqNomPiece = document.getElementById(`nomPiece${j}`);
+          let reqLongueurP = document.getElementById(`longueurP${j}`);
+          let reqLargeurP = document.getElementById(`largeurP${j}`);
+          let reqHauteurP = document.getElementById(`hauteurP${j}`);
+          let reqVolumeP = document.getElementById(`volumeTotal${j}`);
+          let reqTb = document.getElementById(`tempBase${j}`);
+          let reqTc = document.getElementById(`tempConfort${j}`);
+          let reqG = document.getElementById(`isolation${j}`);
+          let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
+  
+          myDBKitadi.transaction(function (transaction) {
+              var executeQuery =
                 "INSERT INTO Piece (INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
-                transaction.executeSql(
-                    executeQuery,
-                    [
-                        `${reqNomPiece.value}`,
-                        `${reqLongueurP.value}`,
-                        `${reqLargeurP.value}`,
-                        `${reqHauteurP.value}`,
-                        `${reqVolumeP.value}`,
-                        `${reqTb.value}`,
-                        `${reqTc.value}`,
-                        `${reqG.value}`,
-                        `${reqPuissancePiece.value}`,
-                        `${idMax}`,
-                    ],
-                    function (tx, result) {
-                        alert("Insertion OK !!!");
-                    },
-                    function (error) {
-                        alert("Une erreur s'est produite !!!");
-                    }
-                    );
-                });
-            }
+              transaction.executeSql(
+                executeQuery,
+                [
+                    `${reqNomPiece.value}`,
+                  `${reqLongueurP.value}`,
+                  `${reqLargeurP.value}`,
+                  `${reqHauteurP.value}`,
+                  `${reqVolumeP.value}`,
+                  `${reqTb.value}`,
+                  `${reqTc.value}`,
+                  `${reqG.value}`,
+                  `${reqPuissancePiece.value}`,
+                  `${idMax}`,
+                ],
+                function (tx, result) {
+                  alert("Insertion OK !!!");
+                },
+                function (error) {
+                  alert("Une erreur s'est produite !!!");
+                }
+              );
+          });
         }
+      }
     }
+
+
+
+
+
+
+
