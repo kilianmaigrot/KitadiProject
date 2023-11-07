@@ -93,7 +93,7 @@ function loadAccueil () {
     <th scope="col" class="px-2 py-3">
     Puissance
     </th>
-    <th scope="col" class="px-2 py-3">
+    <th scope="col" class="px-3 py-3">
     Date de visite
     </th>
     </tr>
