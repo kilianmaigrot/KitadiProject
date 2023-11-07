@@ -483,7 +483,7 @@ function loadDossier() {
   }
 }
 
-function suppressionDossier() {
+function suppressionDossier(idClient) {
   // On n'exécute le code que si nous avons un idClient de renseigné
   console.log("ID Client à supprimer : " + `${idClient.value}`);
 
