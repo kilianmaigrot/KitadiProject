@@ -74,24 +74,6 @@ function onDeviceReady() {
     );
   });
 
-  // Insertion des cas de test, si la base est crée pour la première fois
-  let top = 0;
-  myDBKitadi.transaction(function (transaction) {
-    transaction.executeSql(
-      "SELECT count(*) as Cpt FROM Client",
-      [],
-      function (tx, results) {
-        if (results.rows.item(0).Cpt == 0) {
-          top = 1;
-        }
-      },
-      function (error) {
-        // alert("Erreur, base non dsponible.");
-        top = 0;
-      }
-    );
-  });
-
   loadAccueil();
 }
 
@@ -109,6 +91,7 @@ function loadAccueil() {
     <table class="w-full text-sm md:text-2xl text-gray-400 text-center">
     <thead class="text-xs text-gray-400 uppercase bg-gray-700">
     <tr>
+
     <th scope="col" class="px-2 py-3">
     Nom
     </th>
@@ -155,15 +138,8 @@ function loadTable() {
           } ${results.rows.item(i).Ville}</td>
                     <td>${results.rows.item(i).PuissanceMaison}</td>
                     <td>${results.rows.item(i).DteVisite}</td>
-                    <td><button id="btnSup" class="bg-slate-400 font-bold py-2 px-4 rounded mb-8">Sup. Dos.</button></td>
                 </tr>`;
         }
-        btnSup.addEventListener("click", function () {
-          console.log("On est dans la suppression...");
-          suppressionDossier();
-          alert("Votre piece à bien été supprmé");
-          loadAccueil();
-        });
       },
       null
     );
@@ -507,7 +483,7 @@ function loadDossier() {
   }
 }
 
-function suppressionDossier() {
+function suppressionDossier(idClient) {
   // On n'exécute le code que si nous avons un idClient de renseigné
   console.log("ID Client à supprimer : " + `${idClient.value}`);
 

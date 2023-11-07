@@ -529,3 +529,112 @@ function suppressionDossier(idClient) {
     });
   }
 }
+
+function majDossier(idClient) {
+  // On n'exécute le code que si nous avons un IdClient de renseigné
+  console.log("ID Client à modifier : " + `${idClient.value}`);
+
+  if (`${idClient.value}` > 0) {
+    // On supprime ou non la(es) pièce(s) qui existe
+    // Avec cette technique on traite tous les cas, les modif., les ajouts et les suppressions de pièces.
+    myDBKitadi.transaction(function (transaction) {
+      var executeQuery = "DELETE FROM Pieces where Client_Id=?";
+      transaction.executeSql(
+        executeQuery,
+        [`${idClient.value}`],
+        function (tx, result) {
+          console.log(
+            "MAJ - Suppression(s) réussie(s) pour la(es) pièce(s) du dossier : " +
+              `${idClient.value}`
+          );
+
+          // On injecte la nouvelle version des pièces
+          for (let j = 0; j <= i; j++) {
+            //-- Variables nom, volume ect --//
+            let reqNomPiece = document.getElementById(`nomPiece${j}`);
+            let reqLongueurP = document.getElementById(`longueurP${j}`);
+            let reqLargeurP = document.getElementById(`largeurP${j}`);
+            let reqHauteurP = document.getElementById(`hauteurP${j}`);
+            let reqVolumeP = document.getElementById(`volumeTotal${j}`);
+            let reqTb = document.getElementById(`tempBase${j}`);
+            let reqTc = document.getElementById(`tempConfort${j}`);
+            let reqG = document.getElementById(`isolation${j}`);
+            let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
+
+            myDBKitadi.transaction(function (transaction) {
+              var executeQuery =
+                "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+              transaction.executeSql(
+                executeQuery,
+                [
+                  `${reqNomPiece.value}`,
+                  `${reqLongueurP.value}`,
+                  `${reqLargeurP.value}`,
+                  `${reqHauteurP.value}`,
+                  `${reqVolumeP.value}`,
+                  `${reqTb.value}`,
+                  `${reqTc.value}`,
+                  `${reqG.value}`,
+                  `${reqPuissancePiece.value}`,
+                  `${idClient.value}`,
+                ],
+                function (tx, result) {
+                  console.log(
+                    "MAJ - Insertion  réussie(s) pour la(es) pièce(s) du dossier : " +
+                      `${idClient.value}`
+                  );
+                },
+                function (error) {
+                  alert(
+                    "MAJ - Une erreur s'est produite lors de la suppression des pièces du dossier : " +
+                      `${idClient.value}`
+                  );
+                }
+              );
+            });
+          }
+
+          // On met à jour le dossier Client
+          myDBKitadi.transaction(function (transaction) {
+            var executeQuery =
+              "UPDATE Client set Nom=?, Prenom=?, Adresse=?, CodPostal=?, Ville=?, Tel=?, Mail=?, HtMaison=?, Altitude=?, PuissanceMaison=?) where Id=?";
+            transaction.executeSql(
+              executeQuery,
+              [
+                `${nomClient.value}`,
+                `${prenomClient.value}`,
+                `${adresseClient.value}`,
+                `${codePostal.value}`,
+                `${villeClient.value}`,
+                `${telClient.value}`,
+                `${mailClient.value}`,
+                `${hauteurP.value}`,
+                null,
+                `${kwTotal}`,
+                `${idClient.value}`,
+              ],
+              function (tx, result) {
+                console.log(
+                  "MAJ - Modification réussie pour le client, dossier : " +
+                    `${idClient.value}`
+                );
+              },
+              function (error) {
+                alert(
+                  "MAJ - Une erreur s'est produite lors de la modification du client, dossier : " +
+                    `${idClient.value}`
+                );
+              }
+            );
+          });
+        },
+        function (error) {
+          alert(
+            "MAJ - Une erreur s'est produite lors de la suppression des pièces du dossier : " +
+              `${idClient.value}`
+          );
+        }
+      );
+    });
+  }
+}
