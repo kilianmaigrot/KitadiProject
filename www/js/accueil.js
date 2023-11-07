@@ -1,3 +1,11 @@
+// Note Pour sasha:
+// Page d'accueil opérationnel
+// création opérationnel
+// Suppression et mise à jour du client dans une prochaine version car pas le temps.
+// application testé sur android pixel 7.
+
+
+
 let main = document.getElementById("main");
 let header = document.getElementById('header');
 let footer = document.getElementById('footer');
@@ -58,97 +66,15 @@ function onDeviceReady() {
                     );
                 });
                 
-                // // Si le résultat de la requête ne ramène pas de ligne, on peut alimenter des cas de test
-                // if (top == 0) {
-                //     // Clients
-                //     myDBKitadi.transaction(function (transaction) {
-                //         transaction.executeSql(
-                //             "INSERT INTO Client (Nom, Prenom, Adresse, CodPostal, Ville, Tel, Mail, HtMaison, Altitude, PuissanceMaison, DteVisite) VALUES ('Durand','Paul','38 rue des champs','19100','Brive','0601020304','RueDesChamps@gmail.com',2.5,0,0, date())",
-                //             [],
-                //             function (tx, result) {
-                //                 // alert("La ligne a été créé dans la table Client.");
-                //             },
-                //             function (error) {
-                //                 // alert("La ligne n'a pas été créé dans la table Client.");
-                //             }
-                //             );
-                //         });
-                        
-                //         myDBKitadi.transaction(function (transaction) {
-                //             transaction.executeSql(
-                //                 "INSERT INTO Client (Nom, Prenom, Adresse, CodPostal, Ville, Tel, Mail, HtMaison, Altitude, PuissanceMaison, DteVisite) VALUES ('Dupond','Charles','58 rue des alouettes','19100','Brive','0605026374','RueDesAlouettes@gmail.com',2.5,0,0, date())",
-                //                 [],
-                //                 function (tx, result) {
-                //                     // alert("La ligne a été créé dans la table Client.");
-                //                 },
-                //                 function (error) {
-                //                     // alert("La ligne n'a pas été créé dans la table Client.");
-                //                 }
-                //                 );
-                //             });
-                            
-                //             // Pieces
-                //             myDBKitadi.transaction(function (transaction) {
-                //                 transaction.executeSql(
-                //                     "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES ('Cuisine',3,3,2.5,22.5,12,21,2,2500,1)",
-                //                     [],
-                //                     function (tx, result) {
-                //                         // alert("La ligne a été créé dans la table Piece.");
-                //                     },
-                //                     function (error) {
-                //                         // alert("La ligne n'a pas été créé dans la table Piece.");
-                //                     }
-                //                     );
-                //                 });
-                                
-                //                 myDBKitadi.transaction(function (transaction) {
-                //                     transaction.executeSql(
-                //                         "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES ('Salon',5,4,2.5,50,15,21,3,2500,1)",
-                //                         [],
-                //                         function (tx, result) {
-                //                             // alert("La ligne a été créé dans la table Piece.");
-                //                         },
-                //                         function (error) {
-                //                             // alert("La ligne n'a pas été créé dans la table Piece.");
-                //                         }
-                //                         );
-                //                     });
-                                    
-                //                     myDBKitadi.transaction(function (transaction) {
-                //                         transaction.executeSql(
-                //                             "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES ('Chambre',3,4,2.5,30,18,21,2,2500,1)",
-                //                             [],
-                //                             function (tx, result) {
-                //                                 // alert("La ligne a été créé dans la table Piece.");
-                //                             },
-                //                             function (error) {
-                //                                 // alert("La ligne n'a pas été créé dans la table Piece.");
-                //                             }
-                //                             );
-                //                         });
-                                        
-                //                         myDBKitadi.transaction(function (transaction) {
-                //                             transaction.executeSql(
-                //                                 "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES ('Studio',5,5,2.5,62.5,19,21,2,2500,2)",
-                //                                 [],
-                //                                 function (tx, result) {
-                //                                     // alert("La ligne a été créé dans la table Piece.");
-                //                                 },
-                //                                 function (error) {
-                //                                     // alert("La ligne n'a pas été créé dans la table Piece.");
-                //                                 }
-                //                                 );
-                //                             });
-                                        // }
-                                        loadAccueil ()
-                                    }
+    loadAccueil ()
+}
 
 function loadAccueil () {
 
     header.innerHTML = ""
     
     main.innerHTML = `
-    <main class="flex flex-col p-4 bg-lime-200 min-h-screen text-lime-900 font-semibold text-base md:text-2xl">
+    <main class="flex flex-col p-4 min-h-screen text-lime-900 font-semibold text-base md:text-2xl">
     <img class="mx-auto mb-8" src="./img/KitadiLogo.png" />
     <h1 class="text-center mb-8">Bienvenue sur l'application Kitadi Energies de calcul de la puissance énergétique d'une Maison.</h1>
     <button id="btnNewDossier" class="bg-slate-400 font-bold py-2 px-4 rounded mb-8">
@@ -206,8 +132,7 @@ function loadTable () {
 function loadDossier () {
     
 header.innerHTML = `
-<h2>Informations client</h2>
-    <p class="mb-2 text-gray-500 dark:text-gray-400">
+<div class="flex flex-col text-center border-4 border-cyan-500 p-4">
     <h3>Nom</h3>
     <input type="text" id="nomClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
     <h3>Prénom</h3>
@@ -222,7 +147,7 @@ header.innerHTML = `
     <input type="text" id="telClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
     <h3>e-mail</h3>
     <input type="text" id="mailClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-</p>`
+    </div>`
 
 main.innerHTML =
 
@@ -231,7 +156,7 @@ main.innerHTML =
     '<button id="btncreation" type="button" class="text-white overflow-y-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Créer une pièce</button>' +
 '</div>';
 
-footer.innerHTML = `<div id="total" class="border bg-slate-500 text-center"></div>`+
+footer.innerHTML = `<div id="total" class="flex justify-center items-center border mx-auto w-full h-20 bg-slate-500 text-white text-center">Puissance Total</div>`+
 `<footer class="sticky bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6">
     
     <ul class="flex flex-wrap p-4 justify-around items-center mt-3 text-xl font-medium text-gray-500 sm:mt-0">
@@ -239,9 +164,11 @@ footer.innerHTML = `<div id="total" class="border bg-slate-500 text-center"></di
             <button id="btnSave" class="border rounded text-red-50 px-6 bg-lime-400">Sauvegarder</button>
         </li>
         <li>
-            <button id="btnRetour" class="bg-red-700 text-red-50  px-6 border rounded">Retour</button>
+            <button id="btnDelete" class="border rounded text-red-50 px-6 bg-red-700">Supprimer</button>
         </li>
-        
+        <li>
+            <button id="btnRetour" class="text-red-50 mt-6 bg-sky-500 px-6 border rounded">Retour</button>
+        </li>
     </ul>
 </footer>`
 
@@ -267,31 +194,31 @@ let btnSave = document.getElementById('btnSave');
 let btnRetour = document.getElementById('btnRetour');
 
 
-nomClient.addEventListener('change', function(){
+nomClient.addEventListener('input', function(){
     console.log('Nom client '+nomClient.value);
 });
 
-prenomClient.addEventListener('change', function(){
+prenomClient.addEventListener('input', function(){
     console.log('prenom client '+prenomClient.value);
 });
 
-adresseClient.addEventListener('change', function(){
+adresseClient.addEventListener('input', function(){
     console.log('adresse client '+adresseClient);
 });
 
-codePostal.addEventListener('change', function(){
+codePostal.addEventListener('input', function(){
     console.log('code postal '+codePostal.value);
 });
 
-villeClient.addEventListener('change', function(){
+villeClient.addEventListener('input', function(){
     console.log('ville '+villeClient.value);
 });
 
-telClient.addEventListener('change', function(){
+telClient.addEventListener('input', function(){
     console.log('telephone '+telClient.value);
 });
 
-mailClient.addEventListener('change', function(){
+mailClient.addEventListener('input', function(){
     console.log('mail '+mailClient.value);
 });
 
@@ -303,7 +230,7 @@ btnCreation.addEventListener('click', function(){
 
     let container = document.createElement('div');
 
-    container.innerHTML = '<form class="overflow-y-auto">' +
+    container.innerHTML = '<form class="border-4 border-cyan-500 p-4 mt-2 mb-2">' +
     '<div class="flex flex-col justify-center">'+
         '<h2 class="text-center">Nom de la pièce</h2>'+
         `<input type="text" id="nomPiece${i}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>`+
@@ -311,12 +238,12 @@ btnCreation.addEventListener('click', function(){
 
     '<div class="flex justify-center">'+
         '<div class="flex-col">'+
-    '<h2 class="text-center">Température de base</h2>'+
-            `<input type="number" id="tempBase${i}" class="bg-gray-50 border items-center  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>`+
+    '<h2 class="text-center">Température de base||</h2>'+
+            `<input type="number" id="tempBase${i}" class="bg-gray-50 border items-center w-24 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>`+
         '</div>'+
         '<div class="flex-col">'+
     '<h2 class="text-center">Température de confort</h2>'+
-            `<input type="number" id="tempConfort${i}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>`+
+            `<input type="number" id="tempConfort${i}" class="bg-gray-50 border w-24 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>`+
         '</div>'+
         `<div id="deltaT${i}"></div>`+ //-- Calcul des temperatures --//
     '</div>'+
@@ -343,7 +270,7 @@ btnCreation.addEventListener('click', function(){
         '</div>'+
     '</div>'+
     '<div class="flex-col">'+
-    '<h3 class="text-center">Volume total</h3>'+
+    '<h3 class="text-center">Vol total</h3>'+
     '<div class="flex justify-center">'+
         `<input disabled type="number" id="volumeTotal${i}" class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>`+
     '</div>'+
@@ -381,11 +308,11 @@ let indicePuissance = indiceDiv.innerHTML;
 
 
 
-nomPiece.addEventListener('change', function(){
+nomPiece.addEventListener('input', function(){
     console.log('nom piece '+nomPiece.value);
 });
 
-tb.addEventListener('change', function(){
+tb.addEventListener('input', function(){
     
     console.log(tb.value);
     updateDeltaT();
@@ -393,7 +320,7 @@ tb.addEventListener('change', function(){
 
 });
 
-tc.addEventListener('change', function(){
+tc.addEventListener('input', function(){
     console.log(tc.value);
     updateDeltaT();
     puissanceP(indicePuissance);
@@ -401,20 +328,20 @@ tc.addEventListener('change', function(){
    
 });
 
-longueurP.addEventListener('change', function(){
+longueurP.addEventListener('input', function(){
     console.log(longueurP.value);
     puissanceP(indicePuissance);
 
     
 });
-largeurP.addEventListener('change', function(){
+largeurP.addEventListener('input', function(){
     console.log(largeurP.value);
     puissanceP(indicePuissance);
 
     
     
 });
-hauteurP.addEventListener('change', function(){
+hauteurP.addEventListener('input', function(){
     console.log(hauteurP.value);
     updateVolume();
     puissanceP(indicePuissance);
@@ -422,7 +349,7 @@ hauteurP.addEventListener('change', function(){
     
 });
 
-g.addEventListener('change', function(){
+g.addEventListener('input', function(){
     console.log(g.value);
     puissanceP(indicePuissance);
 
@@ -455,7 +382,7 @@ for (j=0; j<puissancePieces.length; j++){
     console.log(kwTotal);
     let totalDiv = document.getElementById("total")
 
-    totalDiv.innerHTML = `${kwTotal}`;
+    totalDiv.innerHTML = `${kwTotal}`+ ' watts';
 
     
 
@@ -463,14 +390,17 @@ for (j=0; j<puissancePieces.length; j++){
 });
 
 btnSave.addEventListener('click', function(){
-    creationDossier()
+    creationDossier();
+    alert("Votre piece à bien crée");
+    footer.innerHTML= "";
+    loadAccueil();
 });
 
-function creationDossier() {
+function creationDossier() {    
     // On fait le client
-    alert("Fonction lancée")
     let dateToday = new Date();
-    let hauteurSousPlafond  = document.getElementById(hauteurP0).value || (document.getElementById(hauteurP0).value = 0);
+    // let hauteurSousPlafond  = document.getElementById(hauteurP0).value || (document.getElementById(hauteurP0).value = 0);
+    let hauteurSousPlafond  = 0;
     
     myDBKitadi.transaction(function (transaction) {
       var executeQuery =
@@ -486,19 +416,19 @@ function creationDossier() {
           `${telClient.value}`,
           `${mailClient.value}`,
           hauteurSousPlafond,
-          null,
+          0,
           `${kwTotal}`,
           dateToday,
         ],
         function (tx, result) {
-          alert("Insertion OK !!!");
+        //   alert("Insertion OK !!!");
         },
         function (error) {
-          alert("Une erreur s'est produite !!! : " + error);
+            console.log("Une erreur s'est produite !!! : " + error);
         }
       );
     });
-  
+      
     // On va rechercher le dernier max ID cr�er dans la table Client
     let idMax = 0;
     myDBKitadi.transaction(function (transaction) {
@@ -507,56 +437,59 @@ function creationDossier() {
         [],
         function (tx, results) {
           if (results.rows.length != 0) {
-            idMax = results.rows.items(0).MaxId;
-          }
+            creationPieceDossier(results.rows.item(0).MaxId);  
+            }
         },
         function (error) {
-          console.log("Erreur, base non dsponible.");
+          console.log("Erreur, base non disponible.");
         }
       );
     });
-  
-    // On insert les pi�ces si l'idMax (Id client) est sup�rieur � 0
-    if(idMax > 0) {
-      for (let j = 0; j < i; j++) {
-  
-          //-- Variables nom, volume ect --//
-          let reqNomPiece = document.getElementById(`nomPiece${j}`);
-          let reqLongueurP = document.getElementById(`longueurP${j}`);
-          let reqLargeurP = document.getElementById(`largeurP${j}`);
-          let reqHauteurP = document.getElementById(`hauteurP${j}`);
-          let reqVolumeP = document.getElementById(`volumeTotal${j}`);
-          let reqTb = document.getElementById(`tempBase${j}`);
-          let reqTc = document.getElementById(`tempConfort${j}`);
-          let reqG = document.getElementById(`isolation${j}`);
-          let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
-  
-          myDBKitadi.transaction(function (transaction) {
-              var executeQuery =
-                "INSERT INTO Piece (INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
-              transaction.executeSql(
+} 
+
+function creationPieceDossier(idClient) {    
+    // On insert les pi�ces si l'idClient est sup�rieur � 0
+    if(idClient > 0) {
+        for (let j = 0; j <= i; j++) {
+
+            //-- Variables nom, volume ect --//
+            let reqNomPiece = document.getElementById(`nomPiece${j}`);
+            let reqLongueurP = document.getElementById(`longueurP${j}`);
+            let reqLargeurP = document.getElementById(`largeurP${j}`);
+            let reqHauteurP = document.getElementById(`hauteurP${j}`);
+            let reqVolumeP = document.getElementById(`volumeTotal${j}`);
+            let reqTb = document.getElementById(`tempBase${j}`);
+            let reqTc = document.getElementById(`tempConfort${j}`);
+            let reqG = document.getElementById(`isolation${j}`);
+            let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
+
+            myDBKitadi.transaction(function (transaction) {
+                var executeQuery =
+                "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                transaction.executeSql(
                 executeQuery,
                 [
                     `${reqNomPiece.value}`,
-                  `${reqLongueurP.value}`,
-                  `${reqLargeurP.value}`,
-                  `${reqHauteurP.value}`,
-                  `${reqVolumeP.value}`,
-                  `${reqTb.value}`,
-                  `${reqTc.value}`,
-                  `${reqG.value}`,
-                  `${reqPuissancePiece.value}`,
-                  `${idMax}`,
+                    `${reqLongueurP.value}`,
+                    `${reqLargeurP.value}`,
+                    `${reqHauteurP.value}`,
+                    `${reqVolumeP.value}`,
+                    `${reqTb.value}`,
+                    `${reqTc.value}`,
+                    `${reqG.value}`,
+                    `${reqPuissancePiece.value}`,
+                    `${idClient}`,
                 ],
                 function (tx, result) {
-                  alert("Insertion OK !!!");
+                    console.log("Insertion Pièce OK !!!");
                 },
                 function (error) {
-                  alert("Une erreur s'est produite !!!");
+                    console.log("Une erreur s'est produite Pièce !!!");
                 }
-              );
-          });
+                );
+            });
         }
-      }
-    }
-}
+    }   
+} 
+};
+
