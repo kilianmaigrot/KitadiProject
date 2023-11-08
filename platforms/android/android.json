@@ -11,6 +11,10 @@
             {
               "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.sqlc.SQLitePlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -19,6 +23,9 @@
   },
   "installed_plugins": {
     "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
@@ -31,9 +38,26 @@
       "clobbers": [
         "SQLitePlugin"
       ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification",
+      "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
+    },
+    {
+      "id": "cordova-plugin-dialogs.notification_android",
+      "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+      "pluginId": "cordova-plugin-dialogs",
+      "merges": [
+        "navigator.notification"
+      ]
     }
   ],
   "plugin_metadata": {
-    "cordova-sqlite-storage": "6.1.0"
+    "cordova-sqlite-storage": "6.1.0",
+    "cordova-plugin-dialogs": "2.0.2"
   }
 }
