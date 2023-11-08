@@ -132,22 +132,28 @@ function loadTable () {
 function loadDossier () {
     
 header.innerHTML = `
-<div class="flex flex-col text-center border-4 border-cyan-500 p-4">
-    <h3>Nom</h3>
-    <input type="text" id="nomClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    <h3>Prénom</h3>
-    <input type="text" id="prenomClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    <h3>Adresse</h3>
-    <input type="text" id="adresseClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    <h3>Code Postal</h3>
-    <input type="text" id="codePostal"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    <h3>Ville</h3>
-    <input type="text" id="villeClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    <h3>Téléphone</h3>
-    <input type="text" id="telClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    <h3>e-mail</h3>
-    <input type="text" id="mailClient"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
-    </div>`
+<div class="accordion">
+  <input type="checkbox" id="section1" class="accordion-input">
+  <label for="section1" class="accordion-header">Informations client</label>
+  <div class="accordion-content">
+    <div class="flex flex-col text-center border-4 border-cyan-500 p-4">
+        <h3>Nom</h3>
+        <input type="text" id="nomClient"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+        <h3>Prénom</h3>
+        <input type="text" id="prenomClient"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+        <h3>Adresse</h3>
+        <input type="text" id="adresseClient"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+        <h3>Code Postal</h3>
+        <input type="text" id="codePostal"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+        <h3>Ville</h3>
+        <input type="text" id="villeClient"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+        <h3>Téléphone</h3>
+        <input type="text" id="telClient"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+        <h3>e-mail</h3>
+        <input type="text" id="mailClient"  class="input-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>
+    </div>
+    </div>
+</div>`
 
 main.innerHTML =
 
@@ -164,10 +170,7 @@ footer.innerHTML = `<div id="total" class="flex justify-center items-center bord
             <button id="btnSave" class="border rounded text-red-50 px-6 bg-lime-400">Sauvegarder</button>
         </li>
         <li>
-            <button id="btnDelete" class="border rounded text-red-50 px-6 bg-red-700">Supprimer</button>
-        </li>
-        <li>
-            <button id="btnRetour" class="text-red-50 mt-6 bg-sky-500 px-6 border rounded">Retour</button>
+            <button id="btnRetour" class="text-red-50 bg-sky-500 px-6 border rounded">Retour</button>
         </li>
     </ul>
 </footer>`
@@ -222,6 +225,16 @@ mailClient.addEventListener('input', function(){
     console.log('mail '+mailClient.value);
 });
 
+//-- Bouton RETOUR --//
+btnRetour.addEventListener('click', function(){
+
+    const confirmation =  confirm(`vos données ne seront pas sauvegardé.  voulez-vous retourné à l'accueil?`);
+    if(confirmation){
+        loadAccueil();
+    }else{
+         return;
+    }
+});
 
 
 btnCreation.addEventListener('click', function(){
@@ -269,19 +282,17 @@ btnCreation.addEventListener('click', function(){
             `<input type="number" id="hauteurP${i}" class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>`+
         '</div>'+
     '</div>'+
-    '<div class="flex-col">'+
-    '<h3 class="text-center">Vol total</h3>'+
-    '<div class="flex justify-center">'+
-        `<input disabled type="number" id="volumeTotal${i}" class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>`+
-    '</div>'+
-    '</div>'+
+        `<div id="volumeTotal${i}"> 
+        </div>`+
 '</div>'+
     '<h2 class="text-center">Niveau isolation</h2>'+
     '<div class="flex justify-center">'+
         `<input type="number" id="isolation${i}" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>`+
-        `<div id="puissanceP${i}"></div>`+ //-- Div de Puissance P --//
-    '</div>'+    
-    '<br/>'+
+    '</div>'+ 
+    `<div class="flex justify-center items-center">
+        <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 w-1/2 h-10 bg-slate-500 text-white text-center">Watts</div>
+        <div id="btnSupprPiece${i}"><i class=" mt-6 mr-6 fa-solid fa-trash-can fa-xl" style="color: #ed0c0c;"></i></div>`+ //-- Div de Puissance P --// 
+    '</div>'+
     `<div class="hidden" id="indice${i}">${i}</div>`+
 '</form> ';
 
@@ -303,9 +314,9 @@ let volumeP = document.getElementById(`volumeTotal${i}`);
 let g = document.getElementById(`isolation${i}`);
 let puissancePiece = document.getElementById(`puissanceP${i}`)
 let indiceDiv = document.getElementById(`indice${i}`)
+let btnSupprPiece = document.getElementById(`btnSupprPiece${i}`);
 
 let indicePuissance = indiceDiv.innerHTML;
-
 
 
 nomPiece.addEventListener('input', function(){
@@ -384,9 +395,20 @@ for (j=0; j<puissancePieces.length; j++){
 
     totalDiv.innerHTML = `${kwTotal}`+ ' watts';
 
-    
-
 }};
+
+//-- BOUTON DE SUPPRESSION D'UNE SEULE PIECES --//
+btnSupprPiece.addEventListener('click', function(){
+
+    const confirmation = confirm('Voulez-vous vraiment supprimer cette pièce?');
+
+    if(confirmation){
+        container.remove();
+    }else{
+        return
+    }
+    
+});
 });
 
 btnSave.addEventListener('click', function(){

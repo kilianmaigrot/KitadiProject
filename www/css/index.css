@@ -26,3 +26,43 @@ body{
 
 
 }
+
+.accordion {
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .accordion-input {
+    display: none;
+  }
+  
+  .accordion-header {
+    background: #bdc3c7; 
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7); 
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+    color: white;
+    padding: 10px;
+    margin: 0;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+  }
+  
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  
+  .accordion-input:checked + .accordion-header + .accordion-content {
+    max-height: 1000px; /* Une valeur suffisamment grande pour afficher tout le contenu */
+  }
+  
+  .input-field {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
