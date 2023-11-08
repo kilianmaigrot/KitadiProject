@@ -383,138 +383,147 @@ function loadDossier() {
 
   btnSave.addEventListener("click", function () {
     creationDossier();
-    alert("Votre piece à bien crée");
+    alert("Votre piece à bien été crée");
     footer.innerHTML = "";
-    loadAccueil();
+
+    setTimeout(() => {
+      loadAccueil();
+    }, 3000);
+
   });
 
-  function creationDossier() {
-    // On fait le client
-    let hauteurSousPlafond = 0;
+}
 
-    myDBKitadi.transaction(function (transaction) {
-      var executeQuery =
-        "INSERT INTO Client (Nom, Prenom, Adresse, CodPostal, Ville, Tel, Mail, Altitude, PuissanceMaison, DteVisite) VALUES (?,?,?,?,?,?,?,?,?,datetime('now','localtime'))";
-      transaction.executeSql(
-        executeQuery,
-        [
-          `${nomClient.value}`,
-          `${prenomClient.value}`,
-          `${adresseClient.value}`,
-          `${codePostal.value}`,
-          `${villeClient.value}`,
-          `${telClient.value}`,
-          `${mailClient.value}`,
-          0,
-          `${kwTotal}`,
-        ],
-        function (tx, result) {
-          //   alert("Insertion OK !!!");
-        },
-        function (error) {
-          console.log(
-            "INSERTION CLIENT : Une erreur s'est produite !!! : " + error
-          );
-          console.log(error);
-        }
-      );
-    });
+//----------------------------------------------
+//  FONCTIONS Base de données.
+//----------------------------------------------
+function creationDossier() {
+  // On fait le client
+  let hauteurSousPlafond = 0;
 
-    // On va rechercher le dernier max ID cr�er dans la table Client
-    let idMax = 0;
-    myDBKitadi.transaction(function (transaction) {
-      transaction.executeSql(
-        "SELECT Max(Id) as MaxId FROM Client",
-        [],
-        function (tx, results) {
-          if (results.rows.length != 0) {
-            creationPieceDossier(results.rows.item(0).MaxId);
-          }
-        },
-        function (error) {
-          console.log("Erreur, base non disponible.");
-        }
-      );
-    });
-  }
-
-  function creationPieceDossier(idClient) {
-    // On insert les pi�ces si l'idClient est sup�rieur � 0
-    if (idClient > 0) {
-      for (let j = 0; j <= i; j++) {
-        //-- Variables nom, volume ect --//
-        let reqNomPiece = document.getElementById(`nomPiece${j}`);
-        let reqLongueurP = document.getElementById(`longueurP${j}`);
-        let reqLargeurP = document.getElementById(`largeurP${j}`);
-        let reqHauteurP = document.getElementById(`hauteurP${j}`);
-        let reqVolumeP = document.getElementById(`volumeTotal${j}`);
-        let reqTb = document.getElementById(`tempBase${j}`);
-        let reqTc = document.getElementById(`tempConfort${j}`);
-        let reqG = document.getElementById(`isolation${j}`);
-        let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
-
-        myDBKitadi.transaction(function (transaction) {
-          var executeQuery =
-            "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
-          transaction.executeSql(
-            executeQuery,
-            [
-              `${reqNomPiece.value}`,
-              `${reqLongueurP.value}`,
-              `${reqLargeurP.value}`,
-              `${reqHauteurP.value}`,
-              `${reqVolumeP.value}`,
-              `${reqTb.value}`,
-              `${reqTc.value}`,
-              `${reqG.value}`,
-              `${reqPuissancePiece.value}`,
-              `${idClient}`,
-            ],
-            function (tx, result) {
-              console.log("Insertion Pièce OK !!!");
-            },
-            function (error) {
-              console.log("Une erreur s'est produite Pièce !!!");
-            }
-          );
-        });
+  myDBKitadi.transaction(function (transaction) {
+    var executeQuery =
+      "INSERT INTO Client (Nom, Prenom, Adresse, CodPostal, Ville, Tel, Mail, Altitude, PuissanceMaison, DteVisite) VALUES (?,?,?,?,?,?,?,?,?,datetime('now','localtime'))";
+    transaction.executeSql(
+      executeQuery,
+      [
+        `${nomClient.value}`,
+        `${prenomClient.value}`,
+        `${adresseClient.value}`,
+        `${codePostal.value}`,
+        `${villeClient.value}`,
+        `${telClient.value}`,
+        `${mailClient.value}`,
+        0,
+        `${kwTotal}`,
+      ],
+      function (tx, result) {
+        //   alert("Insertion OK !!!");
+      },
+      function (error) {
+        console.log(
+          "INSERTION CLIENT : Une erreur s'est produite !!! : " + error
+        );
+        console.log(error);
       }
+    );
+  });
+
+  // On va rechercher le dernier max ID cr�er dans la table Client
+  let idMax = 0;
+  myDBKitadi.transaction(function (transaction) {
+    transaction.executeSql(
+      "SELECT Max(Id) as MaxId FROM Client",
+      [],
+      function (tx, results) {
+        if (results.rows.length != 0) {
+          creationPieceDossier(results.rows.item(0).MaxId);
+        }
+      },
+      function (error) {
+        console.log("Erreur, base non disponible.");
+      }
+    );
+  });
+}
+
+function creationPieceDossier(idClient) {
+  // On insert les pi�ces si l'idClient est sup�rieur � 0
+  if (idClient > 0) {
+    for (let j = 0; j <= i; j++) {
+
+      //-- Variables nom, volume etc --//
+      let reqNomPiece = document.getElementById(`nomPiece${j}`);
+      let reqLongueurP = document.getElementById(`longueurP${j}`);
+      let reqLargeurP = document.getElementById(`largeurP${j}`);
+      let reqHauteurP = document.getElementById(`hauteurP${j}`);
+      let reqVolumeP = document.getElementById(`volumeTotal${j}`);
+      let reqTb = document.getElementById(`tempBase${j}`);
+      let reqTc = document.getElementById(`tempConfort${j}`);
+      let reqG = document.getElementById(`isolation${j}`);
+      let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
+
+      myDBKitadi.transaction(function (transaction) {
+        var executeQuery =
+          "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        transaction.executeSql(
+          executeQuery,
+          [
+            reqNomPiece.value,
+            reqLongueurP.value,
+            reqLargeurP.value,
+            reqHauteurP.value,
+            reqVolumeP.value,
+            reqTb.value,
+            reqTc.value,
+            reqG.value,
+            reqPuissancePiece.value,
+            idClient,
+          ],
+          function (tx, result) {
+            console.log("Insertion Pièce OK !!!");
+          },
+          function (error) {
+            console.log("Une erreur s'est produite Pièce !!!");
+          }
+        );
+      });
     }
   }
 }
 
 function suppressionDossier(idClient) {
   // On n'exécute le code que si nous avons un idClient de renseigné
-  console.log("ID Client à supprimer : " + `${idClient.value}`);
-
   if (`${idClient.value}` > 0) {
+    console.log("ID Client à supprimer : " + idClient);
+
     // On supprime la(es) pièce(s) : On doit commencer par supprimer les pièces car la table contient la FOREIGN KEY de Client
     myDBKitadi.transaction(function (transaction) {
       var executeQuery = "DELETE FROM Pieces where Client_Id=?";
       transaction.executeSql(
         executeQuery,
-        [`${idClient.value}`],
+        [idClient],
         function (tx, result) {
           console.log(
             "Suppression(s) réussie(s) pour la(es) pièce(s) du dossier : " +
-              `${idClient.value}`
+            idClient
           );
 
           // On supprime le dossier Client
           var executeQuery = "DELETE FROM Client where Id=?";
           transaction.executeSql(
             executeQuery,
-            [`${idClient.value}`],
+            [idClient],
             function (tx, result) {
               console.log(
                 "Suppression réussie pour le client, dossier : " +
-                  `${idClient.value}`
+                idClient
               );
             },
             function (error) {
               alert(
                 "Une erreur s'est produite lors de la suppression du client, dossier : " +
-                  `${idClient.value}`
+                idClient
               );
             }
           );
@@ -522,7 +531,109 @@ function suppressionDossier(idClient) {
         function (error) {
           alert(
             "Une erreur s'est produite lors de la suppression des pièces du dossier : " +
-              `${idClient.value}`
+            idClient
+          );
+        }
+      );
+    });
+  }
+}
+
+function majDossier(idClient) {
+  // On n'exécute le code que si nous avons un IdClient de renseigné
+  if (IdClient > 0) {
+    console.log("ID Client à modifier : " + idClient);
+
+    // On supprime ou non la(es) pièce(s) qui existe
+    // Avec cette technique on traite tous les cas, les modif., les ajouts et les suppressions de pièces.
+    myDBKitadi.transaction(function (transaction) {
+      var executeQuery = "DELETE FROM Pieces where Client_Id=?";
+      transaction.executeSql(
+        executeQuery,
+        [idClient],
+        function (tx, result) {
+          console.log(
+            "MAJ - Suppression(s) réussie(s) pour la(es) pièce(s) du dossier : " +  idClient);
+
+          // On injecte la nouvelle version des pièces
+          for (let j = 0; j <= i; j++) {
+            //-- Variables nom, volume ect --//
+            let reqNomPiece = document.getElementById(`nomPiece${j}`);
+            let reqLongueurP = document.getElementById(`longueurP${j}`);
+            let reqLargeurP = document.getElementById(`largeurP${j}`);
+            let reqHauteurP = document.getElementById(`hauteurP${j}`);
+            let reqVolumeP = document.getElementById(`volumeTotal${j}`);
+            let reqTb = document.getElementById(`tempBase${j}`);
+            let reqTc = document.getElementById(`tempConfort${j}`);
+            let reqG = document.getElementById(`isolation${j}`);
+            let reqPuissancePiece = document.getElementById(`puissanceP${j}`);
+
+            myDBKitadi.transaction(function (transaction) {
+              var executeQuery =
+                "INSERT INTO Piece (LibellePiece, Longueur, Largeur, Hauteur, Volume, TempBase, TempConfort, NivIsolation, PuissancePiece, Client_Id) VALUES (?,?,?,?,?,?,?,?,?,?)";
+              transaction.executeSql(
+                executeQuery,
+                [
+                  `${reqNomPiece.value}`,
+                  `${reqLongueurP.value}`,
+                  `${reqLargeurP.value}`,
+                  `${reqHauteurP.value}`,
+                  `${reqVolumeP.value}`,
+                  `${reqTb.value}`,
+                  `${reqTc.value}`,
+                  `${reqG.value}`,
+                  `${reqPuissancePiece.value}`,
+                  idClient,
+                ],
+                function (tx, result) {
+                  console.log(
+                    "MAJ - Insertion  réussie(s) pour la(es) pièce(s) du dossier : " + idClient);
+                },
+                function (error) {
+                  alert("MAJ - Une erreur s'est produite lors de la suppression des pièces du dossier : " + idClient);
+                }
+              );
+            });
+          }
+
+          // On met à jour le dossier Client
+          myDBKitadi.transaction(function (transaction) {
+            var executeQuery =
+              "UPDATE Client set Nom=?, Prenom=?, Adresse=?, CodPostal=?, Ville=?, Tel=?, Mail=?, HtMaison=?, Altitude=?, PuissanceMaison=?) where Id=?";
+            transaction.executeSql(
+              executeQuery,
+              [
+                `${nomClient.value}`,
+                `${prenomClient.value}`,
+                `${adresseClient.value}`,
+                `${codePostal.value}`,
+                `${villeClient.value}`,
+                `${telClient.value}`,
+                `${mailClient.value}`,
+                `${hauteurP.value}`,
+                null,
+                `${kwTotal}`,
+                idClient,
+              ],
+              function (tx, result) {
+                console.log(
+                  "MAJ - Modification réussie pour le client, dossier : " +
+                  idClient
+                );
+              },
+              function (error) {
+                alert(
+                  "MAJ - Une erreur s'est produite lors de la modification du client, dossier : " +
+                  idClient
+                );
+              }
+            );
+          });
+        },
+        function (error) {
+          alert(
+            "MAJ - Une erreur s'est produite lors de la suppression des pièces du dossier : " +
+            idClient
           );
         }
       );
