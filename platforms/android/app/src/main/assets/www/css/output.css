@@ -991,6 +991,14 @@ input[type="range"]::-ms-fill-lower {
   margin-top: 1.5rem;
 }
 
+.mr-12 {
+  margin-right: 3rem;
+}
+
+.mr-6 {
+  margin-right: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1021,6 +1029,10 @@ input[type="range"]::-ms-fill-lower {
 
 .h-9 {
   height: 2.25rem;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .min-h-screen {
@@ -1199,6 +1211,32 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
+.bg-opacity-80 {
+  --tw-bg-opacity: 0.8;
+}
+
+.bg-opacity-20 {
+  --tw-bg-opacity: 0.2;
+}
+
+.bg-opacity-30 {
+  --tw-bg-opacity: 0.3;
+}
+
 .p-3 {
   padding: 0.75rem;
 }
@@ -1348,6 +1386,11 @@ input[type="range"]::-ms-fill-lower {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-lime-400 {
+  --tw-text-opacity: 1;
+  color: rgb(163 230 53 / var(--tw-text-opacity));
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -1373,6 +1416,46 @@ body{
 #btnInfoClient,footer{
   background: #bdc3c7;
   background: linear-gradient(to right, #2c3e50, #bdc3c7);
+}
+
+.accordion {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.accordion-input {
+  display: none;
+}
+
+.accordion-header {
+  background: #bdc3c7;
+  background: linear-gradient(to right, #2c3e50, #bdc3c7);
+  color: white;
+  padding: 10px;
+  margin: 0;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.accordion-input:checked + .accordion-header + .accordion-content {
+  max-height: 1000px;
+  /* Une valeur suffisamment grande pour afficher tout le contenu */
+}
+
+.input-field {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .hover\:bg-blue-800:hover {
