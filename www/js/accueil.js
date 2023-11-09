@@ -349,7 +349,7 @@ function loadDossier() {
 
       formContainer.insertBefore(form, btnCreation); //-- Position du bouton "créer" vers le bas --//
 
-      //-- Variables températures --//
+      //-- Variables températures --//indicePuissanceif (con)
       let tb = document.getElementById(`tempBase${i}`);
       let tc = document.getElementById(`tempConfort${i}`);
       let deltaT = document.getElementById(`deltaT${i}`);
@@ -365,6 +365,7 @@ function loadDossier() {
       let indiceDiv = document.getElementById(`indice${i}`);
 
       let indicePuissance = indiceDiv.innerHTML;
+      let btnSupprPiece = document.getElementById(`btnSupprPiece${i}`);
 
       nomPiece.addEventListener("input", function () {
         console.log("nom piece " + nomPiece.value);
@@ -415,11 +416,14 @@ function loadDossier() {
       }
 
       function puissanceP(indice) {
-        puissancePiece.value = g.value * volumeP.value * (tb.value - tc.value);
-        puissancePiece.innerHTML = puissancePiece.value + " W";
-        console.log(puissancePiece.value);
-        puissancePieces[indice] = puissancePiece.value;
-        console.log(puissancePieces);
+        if (indice != -1) {
+          puissancePiece.value =
+            g.value * volumeP.value * (tb.value - tc.value);
+          puissancePiece.innerHTML = puissancePiece.value + " W";
+          console.log(puissancePiece.value);
+          puissancePieces[indice] = puissancePiece.value;
+          console.log(puissancePieces);
+        }
 
         kwTotal = 0;
 
@@ -435,6 +439,25 @@ function loadDossier() {
           "kw total calculé sortie de boucle newDossier : " + kwTotal
         );
       }
+
+      //-- BOUTON DE SUPPRESSION D'UNE SEULE PIECE --//
+      btnSupprPiece.addEventListener("click", function () {
+        const confirmation = confirm(
+          "Voulez-vous vraiment supprimer cette pièce?"
+        );
+
+        if (confirmation) {
+          // let supprTotal = kwTotal - puissancePiece.value;
+          // totalDiv.innerHTML = supprTotal;
+          console.log("Indice puissance = " + indicePuissance);
+          puissancePieces[indicePuissance] = 0;
+          container.setAttribute("style", "display: none");
+          container.children[0].classList.add("pieceSuppr");
+          puissanceP(-1);
+        } else {
+          return;
+        }
+      });
     });
 
     btnSave.addEventListener("click", function () {
@@ -759,12 +782,14 @@ function loadOldDossier(idClient) {
           }
 
           function puissanceP(indice) {
-            puissancePiece.value =
-              g.value * volumeP.value * (tb.value - tc.value);
-            puissancePiece.innerHTML = puissancePiece.value + " W";
-            console.log(puissancePiece.value);
-            puissancePieces[indice] = puissancePiece.value;
-            console.log(puissancePieces);
+            if (indice != -1) {
+              puissancePiece.value =
+                g.value * volumeP.value * (tb.value - tc.value);
+              puissancePiece.innerHTML = puissancePiece.value + " W";
+              console.log(puissancePiece.value);
+              puissancePieces[indice] = puissancePiece.value;
+              console.log(puissancePieces);
+            }
 
             //-- APPARITION DU TOTAL D'UNE PIECE DANS  LA CASE --//
             kwTotal = 0;
@@ -773,7 +798,7 @@ function loadOldDossier(idClient) {
               console.log(puissancePieces[j]);
               kwTotal += parseInt(puissancePieces[j]);
               console.log("kw total calculé : " + kwTotal);
-              let totalDiv = document.getElementById("total");
+              totalDiv = document.getElementById("total");
 
               totalDiv.innerHTML = `${kwTotal} Watts`;
             }
@@ -792,10 +817,11 @@ function loadOldDossier(idClient) {
             if (confirmation) {
               // let supprTotal = kwTotal - puissancePiece.value;
               // totalDiv.innerHTML = supprTotal;
-              puissancePieces[i - 1] = 0;
+              console.log("Indice puissance = " + indicePuissance);
+              puissancePieces[indicePuissance] = 0;
               container.setAttribute("style", "display: none");
               container.children[0].classList.add("pieceSuppr");
-              puissanceP();
+              puissanceP(-1);
             } else {
               return;
             }
@@ -1017,11 +1043,14 @@ function loadOldDossier(idClient) {
       }
 
       function puissanceP(indice) {
-        puissancePiece.value = g.value * volumeP.value * (tb.value - tc.value);
-        puissancePiece.innerHTML = puissancePiece.value + " W";
-        console.log(puissancePiece.value);
-        puissancePieces[indice] = puissancePiece.value;
-        console.log(puissancePieces);
+        if (indice != -1) {
+          puissancePiece.value =
+            g.value * volumeP.value * (tb.value - tc.value);
+          puissancePiece.innerHTML = puissancePiece.value + " W";
+          console.log(puissancePiece.value);
+          puissancePieces[indice] = puissancePiece.value;
+          console.log(puissancePieces);
+        }
 
         //-- APPARITION DU TOTAL D'UNE PIECE DANS  LA CASE --//
         kwTotal = 0;
@@ -1030,7 +1059,7 @@ function loadOldDossier(idClient) {
           console.log(puissancePieces[j]);
           kwTotal += parseInt(puissancePieces[j]);
           console.log("kw total calculé : " + kwTotal);
-          let totalDiv = document.getElementById("total");
+          totalDiv = document.getElementById("total");
 
           totalDiv.innerHTML = `${kwTotal} Watts`;
         }
@@ -1049,10 +1078,11 @@ function loadOldDossier(idClient) {
         if (confirmation) {
           // let supprTotal = kwTotal - puissancePiece.value;
           // totalDiv.innerHTML = supprTotal;
-          puissancePieces[i] = 0;
+          console.log("Indice puissance = " + indicePuissance);
+          puissancePieces[indicePuissance] = 0;
           container.setAttribute("style", "display: none");
           container.children[0].classList.add("pieceSuppr");
-          puissanceP();
+          puissanceP(-1);
         } else {
           return;
         }
