@@ -155,25 +155,18 @@ function loadTable() {
                       loadOldDossier (idClientRow)
                   });
 
-                  deleteDossierButtons[i].addEventListener("click", function() {                      
-                      navigator.notification.confirm(
-                          `Confirmez vous la suppression du dossier du client ${nomDossier} ${prenomDossier} ?`,  // message
-                          onConfirm,              // callback to invoke with index of button pressed
-                          'Supprimer',            // title
-                           ['Oui, supprimer','Non, ne pas supprimer']             // buttonLabels
-                      );  
+                  deleteDossierButtons[i].addEventListener("click", function() {   
+                    const confirmation =  confirm(`Confirmez vous la suppression du dossier ${nomDossier} ${prenomDossier} ?`);
+                    if(confirmation){
+                      alert("Suppression du dossier " + idClientRow)
+                      suppressionDossier(idClientRow)
+                      setTimeout(() => {
+                          loadAccueil();
+                      }, "1500");
+                    }else{
+                         return;
+                    }    
                   });
-                  
-            function onConfirm(buttonIndex){
-                if(buttonIndex==1){
-                alert("Suppression du dossier " + idClientRow)
-                suppressionDossier(idClientRow)
-                setTimeout(() => {
-                    loadAccueil();
-                }, "1500");
-                }
-            }
-
           }
         }, "1500");
         },
