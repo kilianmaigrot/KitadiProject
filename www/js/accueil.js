@@ -419,7 +419,7 @@ function loadDossier() {
         if (indice != -1) {
           puissancePiece.value =
             g.value * volumeP.value * (tb.value - tc.value);
-          puissancePiece.innerHTML = puissancePiece.value + " W";
+          puissancePiece.innerHTML = puissancePiece.value + " Watts";
           console.log(puissancePiece.value);
           puissancePieces[indice] = puissancePiece.value;
           console.log(puissancePieces);
@@ -785,7 +785,7 @@ function loadOldDossier(idClient) {
             if (indice != -1) {
               puissancePiece.value =
                 g.value * volumeP.value * (tb.value - tc.value);
-              puissancePiece.innerHTML = puissancePiece.value + " W";
+              puissancePiece.innerHTML = puissancePiece.value + " Watts";
               console.log(puissancePiece.value);
               puissancePieces[indice] = puissancePiece.value;
               console.log(puissancePieces);
@@ -1046,7 +1046,7 @@ function loadOldDossier(idClient) {
         if (indice != -1) {
           puissancePiece.value =
             g.value * volumeP.value * (tb.value - tc.value);
-          puissancePiece.innerHTML = puissancePiece.value + " W";
+          puissancePiece.innerHTML = puissancePiece.value + " Watts";
           console.log(puissancePiece.value);
           puissancePieces[indice] = puissancePiece.value;
           console.log(puissancePieces);

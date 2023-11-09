@@ -419,7 +419,7 @@ function loadDossier() {
         if (indice != -1) {
           puissancePiece.value =
             g.value * volumeP.value * (tb.value - tc.value);
-          puissancePiece.innerHTML = puissancePiece.value + " W";
+          puissancePiece.innerHTML = puissancePiece.value + " Watts";
           console.log(puissancePiece.value);
           puissancePieces[indice] = puissancePiece.value;
           console.log(puissancePieces);
@@ -656,13 +656,13 @@ function loadOldDossier(idClient) {
             "</div>" +
             '<div class="flex justify-center">' +
             '<div class="flex-col">' +
-            '<h2 class="text-center">Température de base||</h2>' +
+            '<h2 class="text-center">Temp. base</h2>' +
             `<input type="number" id="tempBase${i}" value="${
               results.rows.item(i).TempBase
             }" class="bg-gray-50 border items-center w-24 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
             "</div>" +
             '<div class="flex-col">' +
-            '<h2 class="text-center">Température de confort</h2>' +
+            '<h2 class="text-center">Temp. confort</h2>' +
             `<input type="number" id="tempConfort${i}" value="${
               results.rows.item(i).TempConfort
             }" class="bg-gray-50 border w-24 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
@@ -785,7 +785,7 @@ function loadOldDossier(idClient) {
             if (indice != -1) {
               puissancePiece.value =
                 g.value * volumeP.value * (tb.value - tc.value);
-              puissancePiece.innerHTML = puissancePiece.value + " W";
+              puissancePiece.innerHTML = puissancePiece.value + " Watts";
               console.log(puissancePiece.value);
               puissancePieces[indice] = puissancePiece.value;
               console.log(puissancePieces);
@@ -1046,7 +1046,7 @@ function loadOldDossier(idClient) {
         if (indice != -1) {
           puissancePiece.value =
             g.value * volumeP.value * (tb.value - tc.value);
-          puissancePiece.innerHTML = puissancePiece.value + " W";
+          puissancePiece.innerHTML = puissancePiece.value + " Watts";
           console.log(puissancePiece.value);
           puissancePieces[indice] = puissancePiece.value;
           console.log(puissancePieces);
