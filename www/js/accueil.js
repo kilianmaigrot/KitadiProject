@@ -425,11 +425,15 @@ function loadDossier() {
 
         for (j = 0; j < puissancePieces.length; j++) {
           kwTotal += parseFloat = puissancePieces[j];
-          console.log(kwTotal);
+          console.log("kw total calculé : " + kwTotal);
           let totalDiv = document.getElementById("total");
 
           totalDiv.innerHTML = `${kwTotal}` + " Watts";
         }
+
+        console.log(
+          "kw total calculé sortie de boucle newDossier : " + kwTotal
+        );
       }
     });
 
@@ -724,10 +728,12 @@ function loadOldDossier(idClient) {
 
           longueurP.addEventListener("input", function () {
             console.log(longueurP.value);
+            updateVolume();
             puissanceP(indicePuissance);
           });
           largeurP.addEventListener("input", function () {
             console.log(largeurP.value);
+            updateVolume();
             puissanceP(indicePuissance);
           });
           hauteurP.addEventListener("input", function () {
@@ -761,16 +767,20 @@ function loadOldDossier(idClient) {
             console.log(puissancePieces);
 
             //-- APPARITION DU TOTAL D'UNE PIECE DANS  LA CASE --//
-            let kwTotal = 0;
+            kwTotal = 0;
 
             for (j = 0; j < puissancePieces.length; j++) {
               console.log(puissancePieces[j]);
               kwTotal += parseInt(puissancePieces[j]);
-              console.log(kwTotal);
+              console.log("kw total calculé : " + kwTotal);
               let totalDiv = document.getElementById("total");
 
               totalDiv.innerHTML = `${kwTotal} Watts`;
             }
+            console.log(
+              "kw total calculé sortie de boucle oldDossier - vieilles div : " +
+                kwTotal
+            );
           }
 
           //-- BOUTON DE SUPPRESSION D'UNE SEULE PIECE --//
@@ -976,10 +986,12 @@ function loadOldDossier(idClient) {
 
       longueurP.addEventListener("input", function () {
         console.log(longueurP.value);
+        updateVolume();
         puissanceP(indicePuissance);
       });
       largeurP.addEventListener("input", function () {
         console.log(largeurP.value);
+        updateVolume();
         puissanceP(indicePuissance);
       });
       hauteurP.addEventListener("input", function () {
@@ -1012,16 +1024,20 @@ function loadOldDossier(idClient) {
         console.log(puissancePieces);
 
         //-- APPARITION DU TOTAL D'UNE PIECE DANS  LA CASE --//
-        let kwTotal = 0;
+        kwTotal = 0;
 
         for (j = 0; j < puissancePieces.length; j++) {
           console.log(puissancePieces[j]);
           kwTotal += parseInt(puissancePieces[j]);
-          console.log(kwTotal);
+          console.log("kw total calculé : " + kwTotal);
           let totalDiv = document.getElementById("total");
 
           totalDiv.innerHTML = `${kwTotal} Watts`;
         }
+        console.log(
+          "kw total calculé sortie de boucle oldDossier - nouvelle div : " +
+            kwTotal
+        );
       }
 
       //-- BOUTON DE SUPPRESSION D'UNE SEULE PIECE --//
@@ -1045,6 +1061,7 @@ function loadOldDossier(idClient) {
 
     btnSave.addEventListener("click", function () {
       numberOfPiece();
+      console.log("Puissance totale avant appel MAJ = " + kwTotal);
       setTimeout(() => {
         majDossier(idClient, numberPiece);
       }, 1000);
@@ -1283,8 +1300,9 @@ function majDossier(idClient, nbPiece) {
 
           // On met à jour le dossier Client
           myDBKitadi.transaction(function (transaction) {
+            console.log("kwTotal : " + kwTotal);
             var executeQuery =
-              "UPDATE Client set Nom=?, Prenom=?, Adresse=?, CodPostal=?, Ville=?, Tel=?, Mail=?, HtMaison=?, Altitude=?, PuissanceMaison=?) where Id=?";
+              "UPDATE Client set Nom=?, Prenom=?, Adresse=?, CodPostal=?, Ville=?, Tel=?, Mail=?, Altitude=?, PuissanceMaison=? where Id=?";
             transaction.executeSql(
               executeQuery,
               [
@@ -1295,7 +1313,6 @@ function majDossier(idClient, nbPiece) {
                 `${villeClient.value}`,
                 `${telClient.value}`,
                 `${mailClient.value}`,
-                `${hauteurP.value}`,
                 null,
                 `${kwTotal}`,
                 idClient,
