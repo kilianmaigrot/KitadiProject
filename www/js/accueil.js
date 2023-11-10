@@ -190,7 +190,7 @@ function loadDossier() {
   header.innerHTML = `
 <div class="accordion">
   <input type="checkbox" id="section1" class="accordion-input">
-  <label for="section1" class="accordion-header">Informations client <i class="fa-solid fa-arrow-down ml-52"></i></label>
+  <label for="section1" class="accordion-header">Informations client <i class="fa-solid fa-arrow-down"></i></label>
   <div class="accordion-content">
   <div class="flex flex-col text-center border-4 bg-gray-600 opacity-95 rounded-e-md border-white text-white p-4">
         <h3>Nom</h3>
@@ -488,7 +488,7 @@ function loadOldDossier(idClient) {
           header.innerHTML = `
               <div class="accordion">
                 <input type="checkbox" id="section1" class="accordion-input">
-                <label for="section1" class="accordion-header">Informations client <i class="fa-solid fa-arrow-down ml-52"></i></label>
+                <label for="section1" class="accordion-header">Informations client <i class="fa-solid fa-arrow-down"></i></label>
                 <div class="accordion-content">
                 <div class="flex flex-col text-center border-4 bg-gray-600 opacity-95 rounded-e-md border-white p-4 text-white">
                       <h3>Nom</h3>

@@ -1,6 +1,8 @@
 Apoplication Kitadi
 Cordova platform Android
 
+GitHub : github.com/kilianmaigrot/KitadiProject
+
 Réalisé par Jean-Baptiste, Jean-Marie et Kilian
 
 
