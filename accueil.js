@@ -157,7 +157,7 @@ function loadTable() {
               "btnSupprimerDossier"
             );
             editDossierButtons[i].addEventListener("click", function () {
-              alert("Edition du dossier");
+              // alert("Edition du dossier");
               loadOldDossier(idClientRow);
             });
 
@@ -295,10 +295,10 @@ function loadDossier() {
       let container = document.createElement("div");
 
       container.innerHTML =
-        `<form id="container${i}" class="border-4 bg-gray-600 opacity-95 rounded-e-md border-white p-4 mt-2 mb-2 pieceForm">` +
+        `<form id="container${i}" class="border-4 bg-gray-600 opacity-95 rounded-e-md border-white mx-2 mt-2 mb-2 pieceForm">` +
         '<div class="flex flex-col justify-center">' +
         '<h2 class="text-center">Nom de la pièce</h2>' +
-        `<input type="text" id="nomPiece${i}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
+        `<input type="text" id="nomPiece${i}"  class="bg-gray-50 border mx-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
         "</div>" +
         '<div class="flex justify-around">' +
         '<div class="flex-col">' +
@@ -339,7 +339,7 @@ function loadDossier() {
         `<input type="number" id="isolation${i}" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>` +
         "</div>" +
         `<div class="flex justify-center items-center">
-        <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 w-1/2 h-10 bg-slate-500 text-white text-center">Watts</div>
+        <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 mb-2 w-1/2 h-10 bg-slate-500 text-white text-center">Watts</div>
         <div id="btnSupprPiece${i}"><i class=" mt-6 mr-6 fa-solid fa-trash-can fa-xl" style="color: #ed0c0c;"></i></div>` + //-- Div de Puissance P --//
         "</div>" +
         `<div class="hidden" id="indice${i}">${i}</div>` +
@@ -417,7 +417,7 @@ function loadDossier() {
 
       function puissanceP(indice) {
         if (indice != -1) {
-          puissancePiece.value = (g.value * volumeP.value * (tb.value - tc.value)).toFixed(3);
+          puissancePiece.value = g.value * volumeP.value * (tb.value - tc.value);
           puissancePiece.innerHTML = puissancePiece.value + " Watts";
           console.log(puissancePiece.value);
           puissancePieces[indice] = puissancePiece.value;
@@ -564,10 +564,6 @@ function loadDossier() {
         }
       }
     }
-
-    btnRetour.addEventListener("click", function () {
-      loadAccueil();
-    });
   });
 }
 
@@ -646,12 +642,12 @@ function loadOldDossier(idClient) {
           let container = document.createElement("div");
 
           container.innerHTML =
-            `<form id="container${i}" class="border-4 bg-gray-600 opacity-95 rounded-e-md border-white p-4 mt-2 mb-2 pieceForm">` +
+            `<form id="container${i}" class="border-4 bg-gray-600 opacity-95 rounded-e-md border-white mx-2 mt-2 mb-2 pieceForm">` +
             '<div class="flex flex-col justify-center">' +
             '<h2 class="text-center">Nom de la pièce</h2>' +
             `<input type="text" id="nomPiece${i}" value="${
               results.rows.item(i).LibellePiece
-            }" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
+            }" class="bg-gray-50 border border-gray-300 mx-2 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
             "</div>" +
             '<div class="flex justify-center">' +
             '<div class="flex-col">' +
@@ -704,7 +700,7 @@ function loadOldDossier(idClient) {
             }" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>` +
             "</div>" +
             `<div class="flex justify-center items-center">
-                  <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 w-1/2 h-10 bg-slate-500 text-white text-center">Watts</div>
+                  <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 mb-2 w-1/2 h-10 bg-slate-500 text-white text-center">Watts</div>
                   <div id="btnSupprPiece${i}"><i class=" mt-6 mr-6 fa-solid fa-trash-can fa-xl" style="color: #ed0c0c;"></i></div>` + //-- Div de Puissance P --//
             "</div>" +
             `<div class="hidden" id="indice${i}">${i}</div>` +
@@ -782,7 +778,7 @@ function loadOldDossier(idClient) {
 
           function puissanceP(indice) {
             if (indice != -1) {
-              puissancePiece.value = (g.value * volumeP.value * (tb.value - tc.value)).toFixed(3);
+              puissancePiece.value = g.value * volumeP.value * (tb.value - tc.value);
               puissancePiece.innerHTML = puissancePiece.value + " Watts";
               console.log(puissancePiece.value);
               puissancePieces[indice] = puissancePiece.value;
@@ -902,7 +898,7 @@ function loadOldDossier(idClient) {
     //-- Bouton RETOUR --//
     btnRetour.addEventListener("click", function () {
       const confirmation = confirm(
-        `Vos données ne seront pas sauvegardées. Voulez-vous retourner à l'accueil ?`
+        `Si vous avez fait des modifications, celle-ci ne seront pas pris en compte. Voulez-vous retourner à l'accueil ?`
       );
       if (confirmation) {
         loadAccueil();
@@ -919,10 +915,10 @@ function loadOldDossier(idClient) {
       let container = document.createElement("div");
 
       container.innerHTML =
-        `<form id="container${i}" class="border-4 bg-gray-600 opacity-95 rounded-e-md border-white p-4 mt-2 mb-2 pieceForm">` +
+        `<form id="container${i}" class="border-4 bg-gray-600 opacity-95 rounded-e-md border-white mx-2 mt-2 mb-2 pieceForm">` +
         '<div class="flex flex-col justify-center">' +
         '<h2 class="text-center">Nom de la pièce</h2>' +
-        `<input type="text" id="nomPiece${i}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
+        `<input type="text" id="nomPiece${i}"  class="bg-gray-50 border mx-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500"/>` +
         "</div>" +
         '<div class="flex justify-center">' +
         '<div class="flex-col">' +
@@ -963,7 +959,7 @@ function loadOldDossier(idClient) {
         `<input type="number" id="isolation${i}" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3"/>` +
         "</div>" +
         `<div class="flex justify-center items-center">
-      <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 w-1/2 h-10 bg-slate-500 text-white text-center">Watts</div>
+      <div id="puissanceP${i}" class="flex justify-center mr-12 items-center border mx-auto mt-2 w-1/2 h-10 mb-2 bg-slate-500 text-white text-center">Watts</div>
       <div id="btnSupprPiece${i}"><i class=" mt-6 mr-6 fa-solid fa-trash-can fa-xl" style="color: #ed0c0c;"></i></div>` + //-- Div de Puissance P --//
         "</div>" +
         `<div class="hidden" id="indice${i}">${i}</div>` +
@@ -1042,7 +1038,7 @@ function loadOldDossier(idClient) {
 
       function puissanceP(indice) {
         if (indice != -1) {
-          puissancePiece.value = (g.value * volumeP.value * (tb.value - tc.value)).toFixed(3);
+          puissancePiece.value = g.value * volumeP.value * (tb.value - tc.value);
           puissancePiece.innerHTML = puissancePiece.value + " Watts";
           console.log(puissancePiece.value);
           puissancePieces[indice] = puissancePiece.value;
@@ -1096,10 +1092,6 @@ function loadOldDossier(idClient) {
       setTimeout(() => {
         loadAccueil();
       }, 1000);
-    });
-
-    btnRetour.addEventListener("click", function () {
-      loadAccueil();
     });
   }, "1000");
 }
